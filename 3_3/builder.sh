@@ -25,4 +25,4 @@ docker push "$DOCKER_IMAGE"
 echo "=> Cleaning up..."
 rm -rf "$TEMP_DIR"
 
-echo "=> Success! Image pushed to Docker Hub."
+echo "=> Success! Image pushed to Docker Hub successfully !"
