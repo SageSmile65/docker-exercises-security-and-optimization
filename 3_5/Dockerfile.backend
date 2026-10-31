@@ -6,13 +6,11 @@ WORKDIR /usr/src/app
 
 COPY code/example-backend .
 
-RUN useradd -m appuser
-RUN chown -R appuser .
+RUN useradd -m appuser &&  chown -R appuser .
 USER appuser
 
 ENV REQUEST_ORIGIN=http://localhost:5001
 
-RUN go build
-RUN go test ./...
+RUN go build &&  go test ./... && rm -rf cache
 
 CMD ["./server"]
