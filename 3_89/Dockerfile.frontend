@@ -13,5 +13,7 @@ RUN npm install && npm run build
 ################################
 
 FROM nginx:1.19-alpine
+RUN adduser -D appuser && chown -R appuser .
+USER appuser
 
 COPY --from=build-stage /app/build/ /usr/share/nginx/html
