@@ -1,0 +1,15 @@
+FROM golang:alpine
+
+EXPOSE 8080
+
+WORKDIR /app
+
+COPY code/example-backend .
+RUN adduser -D appuser &&  chown -R appuser .
+USER appuser
+
+ENV REQUEST_ORIGIN=http://localhost:5001
+
+RUN go build &&  go test ./... && rm -rf cache
+
+CMD ["./server"]
