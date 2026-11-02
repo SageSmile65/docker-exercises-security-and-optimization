@@ -1,0 +1,17 @@
+FROM node:16-alpine AS build-stage
+
+EXPOSE 5001
+
+WORKDIR /app
+
+COPY code/example-frontend .
+
+RUN adduser -D appuser && chown -R appuser .
+USER appuser
+RUN npm install && npm run build
+
+################################
+
+FROM nginx:1.19-alpine
+
+COPY --from=build-stage /app/build/ /usr/share/nginx/html
