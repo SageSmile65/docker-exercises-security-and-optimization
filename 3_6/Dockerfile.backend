@@ -5,12 +5,11 @@ EXPOSE 8080
 WORKDIR /usr/src/app
 
 COPY code/example-backend .
-
-RUN useradd -m appuser &&  chown -R appuser .
-USER appuser
-
 ENV REQUEST_ORIGIN=http://localhost:5001
 
-RUN go build &&  go test ./... && rm -rf cache
+RUN useradd -m appuser &&  chown -R appuser . && \
+    go build &&  go test ./... && rm -rf cache
+
+USER appuser
 
 CMD ["./server"]
