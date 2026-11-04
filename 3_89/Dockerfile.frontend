@@ -6,6 +6,7 @@ COPY code/example-frontend .
 
 RUN adduser -D appuser && chown -R appuser .
 USER appuser
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
 RUN npm install && npm run build
 
 ################################
