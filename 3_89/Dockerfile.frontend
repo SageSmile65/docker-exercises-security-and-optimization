@@ -3,10 +3,10 @@ FROM node:16-alpine AS build-stage
 WORKDIR /app
 
 COPY code/example-frontend .
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
 
 RUN adduser -D appuser && chown -R appuser .
 USER appuser
-ENV REACT_APP_BACKEND_URL=http://localhost:8080
 RUN npm install && npm run build
 
 ################################
